@@ -11,7 +11,16 @@ Workflow should consist of first establishing the connection from the three data
 * powerBI for brownie points
 
 ## Data cleaning steps
-* Non related column names are not unique, eg. `staffs.csv` has "name" for staff member, but `stores.csv` has "name" for store name. This should be inspected and renamed
+### Shared column names
+* Non related column names are not unique, eg. `staffs.csv` has "name" for staff member, but `stores.csv` has "name" for store name. This should be inspected and renamed, I plan to implement a `utils.py` with a function that takes a input file or dataframe and renames with a dictionary. Possibly writes to a staging area
+* On second thought maybe it's fine and I should just be careful when making my relations
+
+### Tables without primary key 
+* Orders_items.csv contains multiple entries for a single order, and has no column with distinct values. I should probably create a new unique column as primary key 
+* Definitely creating a new id column for missing unique column tables
+    - orders_items.csv -> transaction_id
+    - staffs.csv -> staff_id
+     
 
 
 # TODO 

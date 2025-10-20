@@ -1,22 +1,22 @@
-from typing import Union
-import polars as pl
-from fastapi import FastAPI
-from os.path import join
+import config
+import utils
+from connection import DatabaseConnection
+from table import Table
+import pandas as pd
 
-app = FastAPI()
 
-orders = pl.read_csv(join("data","orders.csv"))
-order_items = pl.read_csv(join("data","order_items.csv"))
-customers = pl.read_csv(join("data","customers.csv"))
+def main():
+    # staff_translation = {"name": "staff_first_name", "last_name": "staff_first_name"}
+    # data = config.RAW_DATA_DIR / "csv" / "staffs.csv"
 
-@app.get("/orders")
-def read_orders():
-    return orders.write_json()
+    with DatabaseConnection(config.dbconfig) as connection:
+        print(connection.is_connected())
+        order_items = Table("customers", connection)
 
-@app.get("/order_items")
-def read_order_items():
-    return order_items.write_json()
+        order_items_data = pd.read_csv(config.RAW_DATA_DIR / "api" / "data" / "order_items.csv").to_dict("records")
+        
+        utils.run_sql_schema(config.DB_SCHEMA, connection=connection)
+        order_items.insertmany(order_items_data)
 
-@app.get("/customers")
-def read_customers():
-    return customers.write_json()
+if __name__ == "__main__":
+    main()
