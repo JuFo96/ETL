@@ -11,7 +11,15 @@ TESTS_DIR = BASE_DIR / "tests"
 SCHEMA_DIR = BASE_DIR / "schema"
 
 # Files
-
+CUSTOMERS_FILE = RAW_DATA_DIR / "api/data/customers.csv"
+ORDER_ITEMS_FILE = RAW_DATA_DIR / "api/data/order_items.csv"
+ORDERS_FILE = RAW_DATA_DIR / "api/data/orders.csv"
+STAFFS_FILE = RAW_DATA_DIR / "csv/staffs.csv"
+STORES_FILE = RAW_DATA_DIR / "csv/stores.csv"
+BRANDS_FILE = RAW_DATA_DIR / "db/brands.csv"
+CATEGORIES_FILE = RAW_DATA_DIR / "db/categories.csv"
+PRODUCTS_FILE = RAW_DATA_DIR / "db/products.csv"
+STOCKS_FILE = RAW_DATA_DIR / "db/stocks.csv"
 
 RAW_DATA_DIR.mkdir(exist_ok=True, parents=True)
 PROCESSED_DATA_DIR.mkdir(exist_ok=True, parents=True)
