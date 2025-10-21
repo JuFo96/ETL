@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS stocks;
 
 
 CREATE TABLE customers (
-    customer_id INT NOT NULL,
+    customer_id INT NOT NULL PRIMARY KEY,
     first_name VARCHAR(40),
     last_name VARCHAR(40),
     phone VARCHAR(40),
@@ -22,8 +22,7 @@ CREATE TABLE customers (
     street VARCHAR(40),
     city VARCHAR(100),
     state VARCHAR(100),
-    zip_code INT,
-    PRIMARY KEY (customer_id)
+    zip_code INT
 );
 
 
@@ -31,28 +30,25 @@ CREATE TABLE customers (
 NEEDS some sort of feature enginering for a new primary key column maybe transaction_id?
 */
 CREATE TABLE order_items (
-    discount DECIMAL(10,6) constraint check_discount check (discount between 0 and 1), 
+    order_id INT, 
     item_id INT,
-    list_price DECIMAL(10, 2),
-    order_id INT,
     product_id INT,
-    quantity INT
+    quantity INT,
+    list_price DECIMAL(10, 2),
+    discount DECIMAL(10,6) constraint check_discount check (discount between 0 and 1),
+    PRIMARY KEY (order_id, item_id)
 );
 
 CREATE TABLE orders (
     order_id INT NOT NULL PRIMARY KEY,
-    customer_id INT NOT NULL,
+    customer_id INT,
     order_status INT,
-    order_date DATETIME,
-    required_date DATETIME,
-    shipped_date DATETIME,
+    order_date VARCHAR(255),
+    required_date VARCHAR(255),
+    shipped_date VARCHAR(255),
     store VARCHAR(255),
     staff_name VARCHAR(255)
 );
-
-/*
-NEEDS some sort of feature enginering for a new primary key column probably staff_id
-*/
 
 
 CREATE TABLE staffs (
@@ -65,7 +61,6 @@ CREATE TABLE staffs (
     store_name VARCHAR(100),
     street VARCHAR(100),
     manager_id INT
-
 );
 
 
@@ -100,7 +95,6 @@ CREATE TABLE products (
 );
 
 
-
 CREATE TABLE stocks (
     stock_id INT AUTO_INCREMENT PRIMARY KEY,
     store_name VARCHAR(100),
@@ -112,8 +106,12 @@ CREATE TABLE stocks (
 ALTER TABLE order_items ADD CONSTRAINT FK_order_items_products FOREIGN KEY (product_id) REFERENCES products(product_id);
 ALTER TABLE order_items ADD CONSTRAINT FK_order_items_orders FOREIGN KEY (order_id) REFERENCES orders(order_id);
 
+ALTER TABLE orders ADD CONSTRAINT FK_orders_customers FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
+ALTER TABLE orders ADD CONSTRAINT FK_orders_store FOREIGN KEY (store) REFERENCES stores(name);
+
 ALTER TABLE products ADD CONSTRAINT FK_products_brands FOREIGN KEY (brand_id) REFERENCES brands(brand_id);
 ALTER TABLE products ADD CONSTRAINT FK_products_categories FOREIGN KEY (category_id) REFERENCES categories(category_id);
 
 ALTER TABLE stocks ADD CONSTRAINT FK_stocks_products FOREIGN KEY (product_id) REFERENCES products(product_id);
+ALTER TABLE stocks ADD CONSTRAINT FK_stocks_stores FOREIGN KEY (store_name) REFERENCES stores(name); 
 
