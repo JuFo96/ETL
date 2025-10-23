@@ -8,24 +8,11 @@ class Table:
     VALID COLS ["id", "date_time", "customer_name", "customer_email", "product_name", "product_price"]
     """
 
-    def __init__(self, table_name: str, connection: DatabaseConnection) -> None:
+    def __init__(self, table_name: str, connection: DatabaseConnection, valid_columns: set[str]) -> None:
         self.table_name: str = table_name
         self.connection: DatabaseConnection = connection
-        self.valid_columns: set = {
-            "id",
-            "order_id",
-            "timestamp",
-            "date_time",
-            "customer_id",
-            "customer_name",
-            "customer_email",
-            "product_id",
-            "product_name",
-            "product_price",
-            "price",
-            "email",
-            "*"
-        }
+        self.valid_columns: set = valid_columns
+        self.valid_columns.add("*")
 
     def validate_columns(self, cols: Iterable[str]) -> None:
         """Validates supplied columns is in the whitelist columns to prevent sql injection
