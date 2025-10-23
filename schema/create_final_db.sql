@@ -115,3 +115,5 @@ ALTER TABLE products ADD CONSTRAINT FK_products_categories FOREIGN KEY (category
 ALTER TABLE stocks ADD CONSTRAINT FK_stocks_products FOREIGN KEY (product_id) REFERENCES products(product_id);
 ALTER TABLE stocks ADD CONSTRAINT FK_stocks_stores FOREIGN KEY (store_name) REFERENCES stores(name); 
 
+ALTER TABLE staffs ADD CONSTRAINT FK_staffs_stores FOREIGN KEY (store_name) REFERENCES stores(name)
+
