@@ -45,6 +45,7 @@ Workflow should consist of first establishing the connection from the three data
     - Sparks seems to be about orchestrating distributed data access via planning (catalyst) generate plan (directed acyclic graph/DAG) task management (spark scheduler)
 * I want some sort of benchmarking suite and version control to test different versions
 * Issue tracker, I want to document my changes
+* I want to use uuids, they don't seem to impact performance, some hand wavy arguments for privacy 
 * Using surrogate keys as primary keys is beneficial to hide it from users from eg typos in inserts, also is more resistent to change in natural data.
 
 
