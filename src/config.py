@@ -48,5 +48,5 @@ class DatabaseConnectionConfig:
     database: str | None
 
 
-dbconfig = DatabaseConnectionConfig("localhost", 3306, "root", "password", DB_NAME)
+dbconfig = DatabaseConnectionConfig(host="localhost", port=3306, user="root", password="password", database=DB_NAME)
 dbconfig_dict = asdict(dbconfig)

@@ -81,7 +81,7 @@ class Schema:
 
 def main() -> None:
     schema1 = Schema(schema_file_path=config.DB_SCHEMA)
-    print(schema1.get_all_columns())
+    print(schema1.tables)
 
 
 if __name__ == "__main__":

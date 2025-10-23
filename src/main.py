@@ -3,6 +3,7 @@ import pandas as pd
 
 import config
 import utils
+from schema import Schema
 from connection import DatabaseConnection
 from table import Table
 
@@ -11,7 +12,18 @@ def main():
     # staff_translation = {"name": "staff_first_name", "last_name": "staff_first_name"}
     # data = config.RAW_DATA_DIR / "csv" / "staffs.csv"
 
+    integrated_db = Schema(schema_file_path=config.DB_SCHEMA)
+    table_names = integrated_db.get_tables()
+    
+    tables = {}
+
     with DatabaseConnection(config=config.dbconfig) as connection:
+        #graph = utils.get_table_dependencies(sql_procedure_path=config.DEPENDENCIES_PROCEDURE, connection=connection)
+        #print(graph)
+        #for table in table_names:
+        #    tables[table] = Table(table_name=table, connection=connection)
+        #    tables[table].insertmany()
+        integrated_db.run_sql_schema(connection)
         order_items = Table(table_name="order_items", connection=connection)
         brands = Table(table_name="brands", connection=connection)
         categories = Table(table_name="categories", connection=connection)
@@ -45,7 +57,7 @@ def main():
             pd.read_csv(config.STORES_FILE).replace({np.nan: None}).to_dict("records")
         )
 
-        utils.run_sql_schema(file=config.DB_SCHEMA, connection=connection)
+        
 
         # No children
         brands.insertmany(data=brands_data)
