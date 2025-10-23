@@ -34,6 +34,7 @@ URL_CUSTOMERS = "https://etl-server.fly.dev/customers"
 
 DB_NAME = "integrated_db"
 DB_SCHEMA = SCHEMA_DIR / "create_final_db.sql"
+DEPENDENCIES_PROCEDURE = SCHEMA_DIR / "get_dependencies.sql"
 
 
 
