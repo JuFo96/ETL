@@ -1,4 +1,4 @@
-from typing import Any, Iterable, Optional, Hashable
+from typing import Any, Hashable, Iterable, Optional
 
 from connection import DatabaseConnection
 
@@ -8,7 +8,9 @@ class Table:
     VALID COLS ["id", "date_time", "customer_name", "customer_email", "product_name", "product_price"]
     """
 
-    def __init__(self, table_name: str, connection: DatabaseConnection, valid_columns: set[str]) -> None:
+    def __init__(
+        self, table_name: str, connection: DatabaseConnection, valid_columns: set[str]
+    ) -> None:
         self.table_name: str = table_name
         self.connection: DatabaseConnection = connection
         self.valid_columns: set = valid_columns
@@ -28,7 +30,8 @@ class Table:
         invalid_cols = set(cols) - self.valid_columns
         if invalid_cols:
             raise ValueError(
-                f"Invalid column: {invalid_cols} is not in valid columns: {self.valid_columns}")
+                f"Invalid column: {invalid_cols} is not in valid columns: {self.valid_columns}"
+            )
 
     def insert(self, data: dict[str, Any]) -> None:
         """Inserts data dictionary into the table
@@ -61,7 +64,7 @@ class Table:
 
             # Ensure cols is a list of strings
             cols = [str(col) for col in data[0].keys()]
-            #self.validate_columns(cols)
+            self.validate_columns(cols)
             values = []
             for row in data:
                 values.append([row[col] for col in cols])
@@ -103,10 +106,10 @@ class Table:
         with self.connection.cursor() as cur:
             self.validate_columns(cols)
             column_string = ", ".join(cols)
-            
+
             values = []
             sql_string = f"SELECT {column_string} FROM {self.table_name}"
-            
+
             if filters:
                 self.validate_columns(filters.keys())
                 where_list = [f"{col} = %s" for col in filters.keys()]

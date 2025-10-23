@@ -1,18 +1,22 @@
+from collections import OrderedDict, deque
 from pathlib import Path
 
 import pandas as pd
-from collections import OrderedDict, deque, defaultdict
+
 import config
+
 
 def transform_column_names(file: Path, name_translation: dict):
     data = pd.read_csv(file)
-    # print(data.columns)
     renamed_df = data.rename(columns=name_translation)
 
     return renamed_df
 
-def get_table_dependencies(sql_procedure_path: Path, connection) -> list[tuple[str, str]]:
-    with open(file=sql_procedure_path, mode='r') as file:
+
+def get_table_dependencies(
+    sql_procedure_path: Path, connection
+) -> list[tuple[str, str]]:
+    with open(file=sql_procedure_path, mode="r") as file:
         content = file.read()
     with connection.cursor() as cursor:
         cursor.execute(content)
@@ -20,21 +24,19 @@ def get_table_dependencies(sql_procedure_path: Path, connection) -> list[tuple[s
     return table_relations
 
 
-def build_dependency_graph(table_relations: list[tuple[str, str]]) -> dict[str, set[str]]:
-
+def build_dependency_graph(
+    table_relations: list[tuple[str, str]],
+) -> dict[str, set[str]]:
     table_set = set()
-    #dependency_graph = defaultdict(set) 
 
     for table, _ in table_relations:
         table_set.add(table)
-    
-    dependency_graph = {child_table : set() for child_table in table_set}
+
+    dependency_graph = {child_table: set() for child_table in table_set}
 
     for child_table, parent_table in table_relations:
         if parent_table is not None:
             dependency_graph[child_table].add(parent_table)
-        
-        #3{child: parent for child, parent in results}
 
     return dependency_graph
 
@@ -76,13 +78,15 @@ def topological_sort(graph: dict[str, set[str]]) -> list[str]:
 
 
 def get_insert_order(sql_procedure_path: Path, connection) -> list[str]:
-    table_relations = get_table_dependencies(sql_procedure_path=config.DEPENDENCIES_PROCEDURE, connection=connection)
+    table_relations = get_table_dependencies(
+        sql_procedure_path=config.DEPENDENCIES_PROCEDURE, connection=connection
+    )
     graph = build_dependency_graph(table_relations)
     sorted_table = topological_sort(graph)
     return sorted_table
 
-def main():
 
+def main():
     graph = {
         "customers": {"orders"},
         "order_items": {"orders", "products"},
@@ -95,8 +99,7 @@ def main():
         "stocks": {"products", "stores"},
     }
 
-
-    #print(topological_sort(graph))
+    # print(topological_sort(graph))
 
 
 if __name__ == "__main__":
