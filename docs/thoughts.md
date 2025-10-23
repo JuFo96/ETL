@@ -10,6 +10,10 @@ Workflow should consist of first establishing the connection from the three data
 * docker for MySQL server hosting
 * powerBI for brownie points
 
+## Features
+* Automatic extraction of table and column names from schema file
+* Automatic topological sort of insertion order with Kahn's Algorithm
+
 # Data cleaning steps
 ## Shared column names
 * Non related column names are not unique, eg. `staffs.csv` has "name" for staff member, but `stores.csv` has "name" for store name. This should be inspected and renamed, I plan to implement a `utils.py` with a function that takes a input file or dataframe and renames with a dictionary. Possibly writes to a staging area
