@@ -17,11 +17,7 @@ class Schema:
     
 
     def parse_schema_regex(self) -> None:
-        """Parses a schema file to extract table and column names with RegEx.
-
-        Returns:
-            A dictionary with table names as keys and columns as respective values
-        """
+        """Parses a schema file to extract table and column names with RegEx."""
         content = self._read_file()
 
         # Match CREATE TABLE ... (...);
