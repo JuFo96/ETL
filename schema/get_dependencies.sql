@@ -1,4 +1,3 @@
 SELECT TABLE_NAME, REFERENCED_TABLE_NAME
 FROM information_schema.KEY_COLUMN_USAGE
-WHERE constraint_schema = "integrated_db"
-AND REFERENCED_TABLE_NAME IS NOT NULL;
+WHERE constraint_schema = "integrated_db";
