@@ -8,13 +8,18 @@ RAW_DATA_DIR = BASE_DIR / "data/raw"
 PROCESSED_DATA_DIR = BASE_DIR / "data/processed"
 SRC_DIR = BASE_DIR / "src"
 TESTS_DIR = BASE_DIR / "tests"
-SCHEMA_DIR = BASE_DIR / "schema"
+SQL_DIR = BASE_DIR / "sql"
+SCHEMA_DIR = SQL_DIR / "schema"
+STORED_PROCEDURES_DIR = SQL_DIR / "stored_procedures"
 
 # Ensure directories exist
 RAW_DATA_DIR.mkdir(exist_ok=True, parents=True)
 PROCESSED_DATA_DIR.mkdir(exist_ok=True, parents=True)
 SRC_DIR.mkdir(exist_ok=True, parents=True)
 TESTS_DIR.mkdir(exist_ok=True, parents=True)
+SQL_DIR.mkdir(exist_ok=True, parents=True)
+SCHEMA_DIR.mkdir(exist_ok=True, parents=True)
+STORED_PROCEDURES_DIR.mkdir(exist_ok=True, parents=True)
 
 # Files
 CUSTOMERS_FILE = RAW_DATA_DIR / "api/data/customers.csv"
@@ -33,8 +38,8 @@ URL_ORDER_ITEMS = "https://etl-server.fly.dev/order_items"
 URL_CUSTOMERS = "https://etl-server.fly.dev/customers"
 
 DB_NAME = "integrated_db"
-DB_SCHEMA = SCHEMA_DIR / "create_final_db.sql"
-DEPENDENCIES_PROCEDURE = SCHEMA_DIR / "get_dependencies.sql"
+DB_SCHEMA = SCHEMA_DIR / "denormalised_integrated_db.sql"
+DEPENDENCIES_PROCEDURE = STORED_PROCEDURES_DIR / "get_dependencies.sql"
 
 
 
