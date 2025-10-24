@@ -43,9 +43,9 @@ CREATE TABLE orders (
     order_id INT NOT NULL PRIMARY KEY,
     customer_id INT,
     order_status INT,
-    order_date VARCHAR(255),
-    required_date VARCHAR(255),
-    shipped_date VARCHAR(255),
+    order_date DATE,
+    required_date DATE,
+    shipped_date DATE,
     store VARCHAR(255),
     staff_name VARCHAR(255)
 );
