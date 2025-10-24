@@ -51,6 +51,9 @@ Workflow should consist of first establishing the connection from the three data
 * Issue tracker, I want to document my changes
 * I want to use uuids, they don't seem to impact performance, some hand wavy arguments for privacy 
 * Using surrogate keys as primary keys is beneficial to hide it from users from eg typos in inserts, also is more resistent to change in natural data.
+* Reading about data normalisation/denormalisation
+    - Normalisation: Remove redudant data, rely on connections in data, used in online transaction processing
+    - Denormalisation: Add redudant data for faster queries, mainly used for analytics where lots of join statements will be used.   
 
 
 # TODO 
