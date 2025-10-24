@@ -38,7 +38,7 @@ URL_ORDER_ITEMS = "https://etl-server.fly.dev/order_items"
 URL_CUSTOMERS = "https://etl-server.fly.dev/customers"
 
 DB_NAME = "integrated_db"
-DB_SCHEMA = SCHEMA_DIR / "denormalised_integrated_db.sql"
+DB_SCHEMA = SCHEMA_DIR / "baseline_integrated_db.sql"
 DEPENDENCIES_PROCEDURE = STORED_PROCEDURES_DIR / "get_dependencies.sql"
 
 
