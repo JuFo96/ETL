@@ -15,4 +15,5 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ipykernel>=7.0.1",
+    "snakeviz>=2.2.2",
 ]
