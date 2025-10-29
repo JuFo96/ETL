@@ -15,13 +15,13 @@ DROP TABLE IF EXISTS stocks;
 
 CREATE TABLE customers (
     customer_id INT NOT NULL PRIMARY KEY,
-    first_name VARCHAR(40),
-    last_name VARCHAR(40),
-    phone VARCHAR(40),
-    email VARCHAR(40),
-    street VARCHAR(40),
-    city VARCHAR(100),
-    state VARCHAR(100),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    phone VARCHAR(255),
+    email VARCHAR(255),
+    street VARCHAR(255),
+    city VARCHAR(255),
+    state VARCHAR(255),
     zip_code INT
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE order_items (
     product_id INT,
     quantity INT,
     list_price DECIMAL(10, 2),
-    discount DECIMAL(10,6) constraint check_discount check (discount between 0 and 1),
+    discount DECIMAL(10, 6) constraint check_discount check (discount between 0 and 1),
     PRIMARY KEY (order_id, item_id)
 );
 
@@ -53,41 +53,41 @@ CREATE TABLE orders (
 
 CREATE TABLE staffs (
     staff_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50),
-    last_name VARCHAR(50),
+    name VARCHAR(255),
+    last_name VARCHAR(255),
     email VARCHAR(255),
-    phone VARCHAR(50),
+    phone VARCHAR(255),
     active BOOLEAN,
-    store_name VARCHAR(100),
-    street VARCHAR(100),
+    store_name VARCHAR(255),
+    street VARCHAR(255),
     manager_id INT
 );
 
 
 CREATE TABLE stores (
-    name VARCHAR(50) PRIMARY KEY,
-    phone VARCHAR(50),
+    name VARCHAR(255) PRIMARY KEY,
+    phone VARCHAR(255),
     email VARCHAR(255),
-    street VARCHAR(100),
-    city VARCHAR(100),
-    state VARCHAR(100),
+    street VARCHAR(255),
+    city VARCHAR(255),
+    state VARCHAR(255),
     zip_code INT
 );
 
 CREATE TABLE brands (
     brand_id INT NOT NULL PRIMARY KEY,
-    brand_name VARCHAR(100)
+    brand_name VARCHAR(255)
 );
 
 CREATE TABLE categories (
     category_id INT NOT NULL PRIMARY KEY,
-    category_name VARCHAR(100)
+    category_name VARCHAR(255)
 );
 
 
 CREATE TABLE products (
     product_id INT NOT NULL PRIMARY KEY,
-    product_name VARCHAR(100),
+    product_name VARCHAR(255),
     brand_id INT, 
     category_id INT, 
     model_year INT,
@@ -97,7 +97,7 @@ CREATE TABLE products (
 
 CREATE TABLE stocks (
     stock_id INT AUTO_INCREMENT PRIMARY KEY,
-    store_name VARCHAR(100),
+    store_name VARCHAR(255),
     product_id INT, 
     quantity INT
 );
