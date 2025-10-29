@@ -21,7 +21,8 @@ def load_db(database: Schema, connection: DatabaseConnection) -> None:
     """Does something"""
     insert_order = setup_db(database, connection)
     
-    tables = {}
+    tables: dict[str, Table] = {}
+    
     for table in insert_order:
         
         columns = set(database.get_columns(table))
@@ -36,11 +37,11 @@ def load_db(database: Schema, connection: DatabaseConnection) -> None:
 
 
 def main():
-    
     integrated_db = Schema(schema_file_path=config.DB_SCHEMA)
 
     extract_all_sources()
     transform_all_tables(config.RAW_FILES)
+    
     with DatabaseConnection(config=config.dbconfig) as connection:
         load_db(integrated_db, connection)
 
