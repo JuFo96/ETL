@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: integrated_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
+      MYSQL_DATABASE: integrated_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./sql/migrations:/docker-entrypoint-initdb.d/migrations
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-password}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - pipeline_network
+
+  # Python ETL Pipeline (runs as cronjob)
+  etl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: etl_pipeline
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: integrated_db
+      DB_USER: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
+      SCHEDULE: "${ETL_SCHEDULE:-0 * * * *}"  # Every hour by default
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./etl:/app
+      - etl_logs:/app/logs
+    networks:
+      - pipeline_network
+    # Option 1: Run once and exit
+    # command: python run_etl.py
+    
+    # Option 2: Run as cron job
+    command: crond -f -l 2
+
+  # Documentation Generator (on-demand or scheduled)
+  docs:
+    image: alpine:latest
+    container_name: docs_generator
+    user: "${UID:-1000}:${GID:-1000}"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./docs:/docs
+      - ./scripts:/scripts
+    working_dir: /docs
+    networks:
+      - pipeline_network
+    environment:
+      DB_DSN: mysql://root:${MYSQL_ROOT_PASSWORD:-password}@mysql:3306/integrated_db
+    entrypoint: ["/scripts/generate-docs.sh"]
+    # Run on-demand with: docker-compose run --rm docs
+    profiles:
+      - docs  # Only runs when explicitly called
+
+  # Mermaid converter (on-demand)
+  mermaid:
+    image: minlag/mermaid-cli
+    container_name: mermaid_converter
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./docs:/data
+    working_dir: /data
+    profiles:
+      - docs  # Only runs when explicitly called
+    # Run with: docker-compose run --rm mermaid -i schema.mmd -o schema.svg
+
+volumes:
+  mysql_data:
+  etl_logs:
+
+networks:
+  pipeline_network:
+    driver: bridge
