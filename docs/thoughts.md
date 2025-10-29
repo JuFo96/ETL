@@ -54,8 +54,7 @@ Workflow should consist of first establishing the connection from the three data
 * Reading about data normalisation/denormalisation
     - Normalisation: Remove redudant data, rely on connections in data, used in online transaction processing
     - Denormalisation: Add redudant data for faster queries, mainly used for analytics where lots of join statements will be used.   
-
+* I want to stream data changes with Change Data Capture (CDC), this requires some sort of auditlog in the database.
 
 # TODO 
 ## Issue list
-* Data types of of date formats need to be fixed, currently treated as strings with null values.

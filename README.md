@@ -47,6 +47,7 @@ docker exec -it <CONTAINER NAME> mysql -u root -p #In this specific scenario <CO
 ```
 ## Configuration
 * Paths to raw input files and URLs of API endpoints can be configured in `src/config.py`
+* Target DB connection can be configured in `src/config.py`
 * TODO - ENV variables (.env/docker compose)
 
 
