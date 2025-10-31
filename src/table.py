@@ -4,10 +4,6 @@ from connection import DatabaseConnection
 
 
 class Table:
-    """
-    VALID COLS ["id", "date_time", "customer_name", "customer_email", "product_name", "product_price"]
-    """
-
     def __init__(
         self, table_name: str, connection: DatabaseConnection, valid_columns: set[str]
     ) -> None:

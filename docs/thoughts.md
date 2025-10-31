@@ -8,7 +8,6 @@ Workflow should consist of first establishing the connection from the three data
 
 * uv for python management
 * docker for MySQL server hosting
-* powerBI for brownie points
 
 ## Features
 * Automatic extraction of table and column names from schema file

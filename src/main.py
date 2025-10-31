@@ -51,4 +51,4 @@ if __name__ == "__main__":
     start = time.time()
     main()
     end = time.time()
-    print(f"time: {end - start:.2f}s")
+    print(f"Elapsed time: {end - start:.2f}s")

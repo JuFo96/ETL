@@ -25,13 +25,14 @@ def transform_all_tables(tables: dict[str, Path]) -> None:
     
 
 def main():
-    df = pd.read_csv(config.ORDERS_FILE)
-    date_columns = ["order_date", "required_date", "shipped_date"]
-    df = reorder_dates(df, date_columns)
+    pass
+    #df = pd.read_csv(config.ORDERS_FILE)
+    #date_columns = ["order_date", "required_date", "shipped_date"]
+    #df = reorder_dates(df, date_columns)
 
-    write_to_staging("orders", df)
+    #write_to_staging("orders", df)
 
-    print(df)
+    ##print(df)
 
 
 if __name__ == "__main__":
