@@ -61,7 +61,6 @@ docker exec -it <CONTAINER NAME> mysql -u root -p #In this specific scenario <CO
 flowchart LR
     A[API Endpoints] -->|Extract| B[Raw Data Folder]
     C[Local CSV Files] -->|Extract| B
-    D[Local Database] -->|Extract| B
     B -->|Transform pandas| E[Transformed Data]
     E[Transformed Data] -->|Move to Staging| F[Processed Data]
     F -->|Load via SQL| G[MySQL Target DB]
