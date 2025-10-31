@@ -24,8 +24,6 @@ def load_db(database: Schema, connection: DatabaseConnection) -> None:
     tables: dict[str, Table] = {}
     
     for table in insert_order:
-        print(table)
-
         columns = set(database.get_columns(table))
         tables[table] = Table(
             table_name=table, connection=connection, valid_columns=columns
