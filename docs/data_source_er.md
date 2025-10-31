@@ -1,7 +1,6 @@
 ## ER diagram for source data
 
 ```mermaid
-
 erDiagram
 
     classDef csv stroke:#d44

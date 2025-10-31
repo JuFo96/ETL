@@ -25,15 +25,15 @@ API_DIR.mkdir(exist_ok=True, parents=True)
 
 # Files
 RAW_FILES = {
-    "customers": RAW_DATA_DIR / "api/customers.csv",
-    "order_items": RAW_DATA_DIR / "api/order_items.csv",
-    "orders": RAW_DATA_DIR / "api/orders.csv",
-    "staffs": RAW_DATA_DIR / "csv/staffs.csv",
     "brands": RAW_DATA_DIR / "db/brands.csv",
     "categories": RAW_DATA_DIR / "db/categories.csv",
+    "stores": RAW_DATA_DIR / "csv/stores.csv",
+    "orders": RAW_DATA_DIR / "api/orders.csv",
+    "customers": RAW_DATA_DIR / "api/customers.csv",
     "products": RAW_DATA_DIR / "db/products.csv",
+    "staffs": RAW_DATA_DIR / "csv/staffs.csv",   
+    "order_items": RAW_DATA_DIR / "api/order_items.csv",
     "stocks": RAW_DATA_DIR / "db/stocks.csv",
-    "stores": RAW_DATA_DIR / "csv/stores.csv"
 }
 
 CUSTOMERS_FILE = RAW_DATA_DIR / "api/customers.csv"
