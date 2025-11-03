@@ -22,7 +22,6 @@ def load_db(database: Schema, connection: DatabaseConnection) -> None:
     insert_order = setup_db(database, connection)
     
     tables: dict[str, Table] = {}
-    
     for table in insert_order:
         columns = set(database.get_columns(table))
         tables[table] = Table(
