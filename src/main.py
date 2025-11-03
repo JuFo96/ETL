@@ -20,7 +20,6 @@ def setup_db(database: Schema, connection: DatabaseConnection) -> list[str]:
 def load_db(database: Schema, connection: DatabaseConnection) -> None:
     """Does something"""
     insert_order = setup_db(database, connection)
-    
     tables: dict[str, Table] = {}
     for table in insert_order:
         columns = set(database.get_columns(table))

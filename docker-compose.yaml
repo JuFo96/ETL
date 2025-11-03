@@ -1,14 +1,15 @@
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: test_integrated_db
+  postgres:
+    image: postgres
+    container_name: pg_integrated_db
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: integrated_db
+      POSTGRES_USER: root    
+      POSTGRES_PASSWORD: password
+      POSTGRES_DATABASE: integrated_db
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgres
     ports:
-      - '3306:3306'
+      - '5432:5432'
 
 volumes:
-  mysql_data:
+  postgres_data:

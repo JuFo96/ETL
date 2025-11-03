@@ -1,6 +1,5 @@
 import uuid
 from pathlib import Path
-from typing import Iterable
 import pandas as pd
 
 import config

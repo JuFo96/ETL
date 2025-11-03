@@ -4,6 +4,7 @@ from contextlib import contextmanager
 from dataclasses import asdict
 
 import mysql.connector
+import psycopg
 
 from config import DatabaseConnectionConfig
 
@@ -20,7 +21,8 @@ class DatabaseConnection:
         """
         self.config = config
         config_dict = asdict(self.config)
-        self.connection = mysql.connector.connect(**config_dict)
+        #self.connection = mysql.connector.connect(**config_dict)
+        self.connection = psycopg.connect(**config_dict)
 
     def __enter__(self) -> "DatabaseConnection":
         """Enter context manager.
@@ -54,7 +56,7 @@ class DatabaseConnection:
         Returns:
             True if connected, False otherwise.
         """
-        return self.connection is not None and self.connection.is_connected()
+        return not self.connection.closed
 
     @contextmanager
     def cursor(self, buffered: bool = True):
@@ -81,7 +83,7 @@ class DatabaseConnection:
         if not self.connection:
             raise RuntimeError("DatabaseConnection connection is not established")
 
-        cursor = self.connection.cursor(buffered=buffered)
+        cursor = self.connection.cursor()
         try:
             yield cursor
         finally:
