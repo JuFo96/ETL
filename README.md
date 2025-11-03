@@ -43,8 +43,14 @@ docker compose up -d
 ```
 Direct access to the mysql shell inside the docker container can be obtained with the following command
 ```bash
-docker exec -it <CONTAINER NAME> mysql -u root -p #In this specific scenario <CONTAINER NAME> = test_integrated_db
+docker exec -it <CONTAINER NAME> mysql -u root -p
 ```
+* Password is defined in `src/config.py` and `docker-compose.yaml` and is "password" for now.
+* Container name is defined in `docker-compose.yaml` and is test_integrated_db for now
+* If main doesn't run you should possibly create DB manually inside mysql shell with
+```
+CREATE DATABASE integrated_db;
+``` 
 ## Configuration
 * Paths to raw input files and URLs of API endpoints can be configured in `src/config.py`
 * Target DB connection can be configured in `src/config.py`
