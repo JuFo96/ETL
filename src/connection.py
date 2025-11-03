@@ -3,7 +3,6 @@
 from contextlib import contextmanager
 from dataclasses import asdict
 
-import mysql.connector
 import psycopg
 
 from config import DatabaseConnectionConfig
@@ -21,7 +20,6 @@ class DatabaseConnection:
         """
         self.config = config
         config_dict = asdict(self.config)
-        #self.connection = mysql.connector.connect(**config_dict)
         self.connection = psycopg.connect(**config_dict)
 
     def __enter__(self) -> "DatabaseConnection":

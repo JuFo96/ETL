@@ -1,3 +1,5 @@
+DROP owned by app_user;
+
 DROP TABLE IF EXISTS brands CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS stores CASCADE;
@@ -49,9 +51,9 @@ CREATE TABLE staffs (
     last_name VARCHAR(255),
     email VARCHAR(255),
     phone VARCHAR(255),
-    active BOOLEAN,
+    active INT,
     store_id INT,
-    manager_id INT
+    manager_id real
 );
 
 

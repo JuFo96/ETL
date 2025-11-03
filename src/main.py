@@ -26,7 +26,7 @@ def load_db(database: Schema, connection: DatabaseConnection) -> None:
         tables[table] = Table(
             table_name=table, connection=connection, valid_columns=columns
         )
-        data = pd.read_csv(config.PROCESSED_DATA_DIR / f"{table}.csv")
+        data = pd.read_parquet(config.PROCESSED_DATA_DIR / f"{table}.parquet")
 
         data = data.to_dict("records")
 

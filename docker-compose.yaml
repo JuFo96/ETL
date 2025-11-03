@@ -2,12 +2,14 @@ services:
   postgres:
     image: postgres
     container_name: pg_integrated_db
+    restart: always
     environment:
-      POSTGRES_USER: root    
+      POSTGRES_USER: admin    
       POSTGRES_PASSWORD: password
       POSTGRES_DATABASE: integrated_db
     volumes:
       - postgres_data:/var/lib/postgres
+      - ./sql/schema:/docker-entrypoint-initdb.d
     ports:
       - '5432:5432'
 

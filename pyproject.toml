@@ -8,6 +8,7 @@ dependencies = [
     "mysql-connector-python>=9.4.0",
     "pandas>=2.3.3",
     "psycopg[binary]>=3.2.12",
+    "pyarrow>=22.0.0",
     "uuid>=1.30",
 ]
 

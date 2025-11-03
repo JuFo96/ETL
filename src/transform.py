@@ -10,7 +10,7 @@ def reorder_dates(df: pd.DataFrame, date_columns: list) -> pd.DataFrame:
     return df
 
 def write_to_staging(table_name: str, df: pd.DataFrame) -> None:
-    return df.to_csv(config.PROCESSED_DATA_DIR / f"{table_name}.csv", index=False)
+    return df.to_parquet(config.PROCESSED_DATA_DIR / f"{table_name}.parquet", index=False)
 
 def transform_all_tables(tables: dict[str, Path]) -> None:
     for table in tables:
@@ -29,13 +29,14 @@ def transform_all_tables(tables: dict[str, Path]) -> None:
 
         if table == "staffs":
             df["store_name"] = df["store_name"].map(name_to_id)
+            df["manager_id"] = df["manager_id"].astype("Int64")
             df = df.rename(columns={"store_name": "store_id"})
             df = df.drop("street", axis=1)
 
         if table == "stocks":
             df["store_name"] = df["store_name"].map(name_to_id)
             df = df.rename(columns={"store_name": "store_id"})
-
+        df = df.convert_dtypes()
         write_to_staging(table, df)
     
 

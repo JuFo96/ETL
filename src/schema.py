@@ -30,7 +30,7 @@ class Schema:
 
             # Extract column names from the columns section
             # Match word at start of line (column name) followed by type
-            column_pattern = r"^\s*`?(\w+)`?\s+(?:INT|VARCHAR|TEXT|DATETIME|DECIMAL|BOOLEAN|BIGINT|SMALLINT|FLOAT|DOUBLE|DATE|TIME|TIMESTAMP|CHAR|BLOB)"
+            column_pattern = r"^\s*`?(\w+)`?\s+(?:INT|VARCHAR|TEXT|real|DATETIME|DECIMAL|BOOLEAN|BIGINT|SMALLINT|FLOAT|DOUBLE|DATE|TIME|TIMESTAMP|CHAR|BLOB)"
 
             columns = []
             for line in columns_section.split("\n"):
