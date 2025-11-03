@@ -2,7 +2,7 @@ import time
 from pathlib import Path
 
 import pandas as pd
-#import polars as pl
+
 
 import config
 
@@ -13,10 +13,9 @@ def read_url_write_csv(url: str, path: Path) -> None:
 
 
 def extract_all_sources() -> None:
+    for api, url in config.API_ENDPOINTS.items():
+        read_url_write_csv(url, config.RAW_DATA_DIR / "api" / f"{api}.csv")
     
-    read_url_write_csv(config.URL_CUSTOMERS, config.RAW_DATA_DIR / "api" /"customers.csv")
-    read_url_write_csv(config.URL_ORDER_ITEMS, config.RAW_DATA_DIR / "api" / "order_items.csv")
-    read_url_write_csv(config.URL_ORDERS, config.RAW_DATA_DIR / "api" / "orders.csv")
 
 
 if __name__ == "__main__":

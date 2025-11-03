@@ -23,7 +23,7 @@ SCHEMA_DIR.mkdir(exist_ok=True, parents=True)
 STORED_PROCEDURES_DIR.mkdir(exist_ok=True, parents=True)
 API_DIR.mkdir(exist_ok=True, parents=True)
 
-# Files
+
 RAW_FILES = {
     "brands": RAW_DATA_DIR / "db/brands.csv",
     "categories": RAW_DATA_DIR / "db/categories.csv",
@@ -36,26 +36,13 @@ RAW_FILES = {
     "stocks": RAW_DATA_DIR / "db/stocks.csv",
 }
 
-CUSTOMERS_FILE = RAW_DATA_DIR / "api/customers.csv"
-ORDER_ITEMS_FILE = RAW_DATA_DIR / "api/order_items.csv"
-ORDERS_FILE = RAW_DATA_DIR / "api/orders.csv"
-STAFFS_FILE = RAW_DATA_DIR / "csv/staffs.csv"
-STORES_FILE = RAW_DATA_DIR / "csv/stores.csv"
-BRANDS_FILE = RAW_DATA_DIR / "db/brands.csv"
-CATEGORIES_FILE = RAW_DATA_DIR / "db/categories.csv"
-PRODUCTS_FILE = RAW_DATA_DIR / "db/products.csv"
-STOCKS_FILE = RAW_DATA_DIR / "db/stocks.csv"
-
-# API
 API_ENDPOINTS = {
     "orders": "https://etl-server.fly.dev/orders",
     "order_items": "https://etl-server.fly.dev/order_items",
     "customers": "https://etl-server.fly.dev/customers",
 }
 
-URL_ORDERS = "https://etl-server.fly.dev/orders" 
-URL_ORDER_ITEMS = "https://etl-server.fly.dev/order_items"
-URL_CUSTOMERS = "https://etl-server.fly.dev/customers"
+
 
 DB_NAME = "integrated_db"
 DB_SCHEMA = SCHEMA_DIR / "baseline_integrated_db.sql"
