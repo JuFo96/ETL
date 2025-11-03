@@ -35,7 +35,7 @@ or with pip and venv
 ```
 python -m venv .venv
 pip install -r requirements.txt
-source .venv/bin/activate # ./venv/Scripts/activate on windows
+source .venv/bin/activate # .venv/Scripts/Activate.ps1 on windows
 ```
 The target MySQL server can be started as a background process with
 ```bash
