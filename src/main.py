@@ -11,7 +11,7 @@ import time
 
 
 def setup_db(database: Schema, connection: DatabaseConnection) -> list[str]:
-    database.run_sql_schema(connection)
+    #database.run_sql_schema(connection)
     insert_order = utils.get_insert_order(
             sql_procedure_path=config.DEPENDENCIES_PROCEDURE, connection=connection
         )

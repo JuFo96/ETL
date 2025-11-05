@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS integrated_db;
-CREATE DATABASE integrated_db;
+DROP DATABASE IF EXISTS bikestore_db;
+CREATE DATABASE bikestore_db;

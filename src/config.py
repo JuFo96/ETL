@@ -44,7 +44,7 @@ API_ENDPOINTS = {
 
 
 
-DB_NAME = "integrated_db"
+DB_NAME = "bikestore_db"
 DB_SCHEMA = SCHEMA_DIR / "psql_integrated_db.sql"
 DEPENDENCIES_PROCEDURE = STORED_PROCEDURES_DIR / "get_dependencies.sql"
 
@@ -61,5 +61,5 @@ class DatabaseConnectionConfig:
     dbname: str | None
 
 
-dbconfig = DatabaseConnectionConfig(host="localhost", port=5432, user="app_user", password="password", dbname=DB_NAME)
+dbconfig = DatabaseConnectionConfig(host="localhost", port=5432, user="etl_app", password="password", dbname=DB_NAME)
 dbconfig_dict = asdict(dbconfig)
