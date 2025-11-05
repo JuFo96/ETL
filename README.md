@@ -58,7 +58,11 @@ CREATE DATABASE integrated_db;
 
 
 # Running the Pipeline
-* The entire pipeline is orchestrated by the python script `src/main.py`, a prerequisite is having the mysql docker container running. 
+The entire pipeline is orchestrated by the python script `src/main.py`, which can be executed with 
+```bash
+uv run src/main.py
+```
+The docker container hosting the sql server must be running when the script is executed. 
 
 
 ## Pipeline Flow
