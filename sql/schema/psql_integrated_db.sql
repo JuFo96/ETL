@@ -1,3 +1,5 @@
+SET search_path to bikestore;
+
 CREATE TABLE customers (
     customer_id INT NOT NULL PRIMARY KEY,
     first_name VARCHAR(255),
