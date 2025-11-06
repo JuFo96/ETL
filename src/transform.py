@@ -18,7 +18,8 @@ def transform_all_tables(tables: dict[str, Path]) -> None:
 
         
         if table == "stores":
-            df["store_id"] = df.index
+            # Pandas is 0 indexed, add + 1 to match id range of other tables.
+            df["store_id"] = df.index + 1
             name_to_id = dict(zip(df["name"], df["store_id"]))
 
         if table == "orders":
