@@ -1,16 +1,7 @@
 from collections import OrderedDict, deque
 from pathlib import Path
 
-import pandas as pd
-
 import config
-
-
-def transform_column_names(file: Path, name_translation: dict):
-    data = pd.read_csv(file)
-    renamed_df = data.rename(columns=name_translation)
-
-    return renamed_df
 
 
 def get_table_dependencies(
@@ -83,7 +74,24 @@ def get_insert_order(sql_procedure_path: Path, connection) -> list[str]:
     )
     graph = build_dependency_graph(table_relations)
     sorted_table = topological_sort(graph)
+    if not sorted_table:
+        raise ValueError("Table insert order is empty: check get_depencies.sql")
     return sorted_table
+
+def run_sql_schema(file, connection) -> None:
+    """Reads a schema file and executes commands sequentially split by ;
+
+    Args:
+        Connection to a database
+    """
+    with open(file, 'r') as file:
+        content = file.read()
+    with connection.cursor() as cur:
+        for statement in content.split(";"):
+            statement = statement.strip()
+            if statement:
+                cur.execute(statement)
+        connection.commit()
 
 
 def main():

@@ -12,9 +12,8 @@ class Schema:
         self.parse_schema_regex()
 
     def _read_file(self) -> str:
-        with open(file=self.file_path, mode='r') as f:
+        with open(file=self.file_path, mode="r") as f:
             return f.read()
-    
 
     def parse_schema_regex(self) -> None:
         """Parses a schema file to extract table and column names with RegEx."""
@@ -40,35 +39,18 @@ class Schema:
 
             self.tables[table_name] = columns
 
-
-
-    def run_sql_schema(self, connection) -> None:
-        """Reads a schema file and executes commands sequentially split by ;
-
-        Args:
-            Connection to a database
-        """
-        content = self._read_file()
-        with connection.cursor() as cur:
-            for statement in content.split(";"):
-                statement = statement.strip()
-                if statement:
-                    cur.execute(statement)
-            connection.commit()
-
-
     def get_tables(self) -> list[str]:
         """Returns a list of table names"""
         return list(self.tables.keys())
 
     def get_columns(self, table_name: str) -> list:
         """Returns a list of column names per table.
-        
+
         Args:
             table_name: table name from schema
 
         Returns:
-            A list of column names for the given table. 
+            A list of column names for the given table.
         """
         return self.tables[table_name]
 
@@ -78,6 +60,7 @@ class Schema:
         for columns in self.tables.values():
             all_cols.extend(columns)
         return set(all_cols)
+
 
 def main() -> None:
     schema1 = Schema(schema_file_path=config.DB_SCHEMA)
