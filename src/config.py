@@ -9,8 +9,8 @@ PROCESSED_DATA_DIR = BASE_DIR / "data/processed"
 SRC_DIR = BASE_DIR / "src"
 TESTS_DIR = BASE_DIR / "tests"
 SQL_DIR = BASE_DIR / "sql"
-SCHEMA_DIR = SQL_DIR / "schema"
-STORED_PROCEDURES_DIR = SQL_DIR / "stored_procedures"
+SCHEMA_DIR = SQL_DIR / "01-schema"
+STORED_PROCEDURES_DIR = SQL_DIR / "02-procedures"
 API_DIR = RAW_DATA_DIR / "api"
 
 # Ensure directories exist
@@ -45,8 +45,9 @@ API_ENDPOINTS = {
 
 
 DB_NAME = "bikestore_db"
-DB_SCHEMA = SCHEMA_DIR / "psql_integrated_db.sql"
+DB_SCHEMA = SCHEMA_DIR / "02-create_tables.sql"
 DEPENDENCIES_PROCEDURE = STORED_PROCEDURES_DIR / "get_dependencies.sql"
+DELETE_BY_USER_PROCEDURE = STORED_PROCEDURES_DIR / "delete_inserts_by_user.sql"
 
 
 
