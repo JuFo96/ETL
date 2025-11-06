@@ -1,3 +1,4 @@
+-- ensures tables are created in bikestore schema without having to type bikestore.<table name>
 SET search_path to bikestore;
 
 CREATE TABLE customers (
@@ -43,7 +44,7 @@ CREATE TABLE staffs (
     phone VARCHAR(255),
     active INT,
     store_id INT,
-    manager_id real
+    manager_id INT
 );
 
 
@@ -84,6 +85,17 @@ CREATE TABLE stocks (
     store_id INT,
     product_id INT, 
     quantity INT
+);
+
+
+CREATE TABLE audit.log (
+  id BIGSERIAL PRIMARY KEY,
+  table_name VARCHAR(100),
+  record_id BIGINT,
+  pk_col VARCHAR(255),
+  action VARCHAR(10),
+  changed_by VARCHAR(255),
+  changed_at TIMESTAMP DEFAULT NOW()
 );
 
 
