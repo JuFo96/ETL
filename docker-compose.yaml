@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres
-    container_name: pg_integrated_db
+    container_name: pg_bikestore_db
     restart: always
     environment:
       POSTGRES_USER: admin    
@@ -9,7 +9,7 @@ services:
       POSTGRES_DB: bikestore_db
     volumes:
       - postgres_data:/var/lib/postgresql
-      - ./sql/schema:/docker-entrypoint-initdb.d
+      - ./sql/01-schema:/docker-entrypoint-initdb.d/
     ports:
       - '5432:5432'
 
