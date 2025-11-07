@@ -37,6 +37,7 @@ def main():
     bikestore_db = Schema(schema_file_path=config.DB_SCHEMA)
     with DatabaseConnection(config=config.dbconfig) as connection:
         with connection.cursor() as cur:
+            # Removes all data on the tables in bikestore
             cur.execute("""CALL bikestore.truncate_data_tables();""")
             cur.execute("set search_path to bikestore;")
         load_db(bikestore_db, connection)

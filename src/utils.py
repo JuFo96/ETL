@@ -7,6 +7,15 @@ import config
 def get_table_dependencies(
     sql_procedure_path: Path, connection
 ) -> list[tuple[str, str]]:
+    """Gets the relations between tables in the database schema
+    
+    Args:
+        sql_procedure_path: Path to the stored sql command
+        connection: The connection to the database
+        
+    Returns:
+        A list of tuples with each table and their relations, 
+        a table can appear multiple times if there's multiple relations"""
     with open(file=sql_procedure_path, mode="r") as file:
         content = file.read()
     with connection.cursor() as cursor:

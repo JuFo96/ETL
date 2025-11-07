@@ -1,6 +1,9 @@
 from pathlib import Path
 from dataclasses import dataclass, asdict
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 # Directories
 BASE_DIR = Path(__file__).parent.parent.resolve()
@@ -57,10 +60,12 @@ DELETE_BY_USER_PROCEDURE = STORED_PROCEDURES_DIR / "delete_inserts_by_user.sql"
 class DatabaseConnectionConfig:
     host: str
     port: int
-    user: str
-    password: str
+    user: str | None
+    password: str | None
     dbname: str | None
 
+user = os.getenv("DB_USER")
+password = os.getenv("DB_PASSWORD")
 
-dbconfig = DatabaseConnectionConfig(host="localhost", port=5432, user="etl_app", password="password", dbname=DB_NAME)
+dbconfig = DatabaseConnectionConfig(host="localhost", port=5432, user=user, password=password, dbname=DB_NAME)
 dbconfig_dict = asdict(dbconfig)
