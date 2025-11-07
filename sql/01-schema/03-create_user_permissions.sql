@@ -27,3 +27,6 @@ GRANT app_user TO etl_app;
 
 CREATE USER admin_user WITH PASSWORD 'password';
 GRANT admin_role TO admin_user;
+
+CREATE USER customer_user WITH PASSWORD 'password';
+GRANT customer_role TO customer_user;
