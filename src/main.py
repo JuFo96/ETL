@@ -12,7 +12,12 @@ from transform import transform_all_tables
 
 
 def load_db(database: Schema, connection: DatabaseConnection) -> None:
-    """Does something"""
+    """Determines optimal insert order and uploads contents of parquet files to db
+
+    Args:
+        database: instance of Schema class to extract valid columns to avoid sql injections
+        connection: connection to database
+    """
     insert_order = utils.get_insert_order(
         sql_procedure_path=config.DEPENDENCIES_PROCEDURE, connection=connection
     )
@@ -30,7 +35,7 @@ def load_db(database: Schema, connection: DatabaseConnection) -> None:
         tables[table].insertmany(data)
 
 
-def main():
+def main() -> None:
     extract_all_sources()
     transform_all_tables(config.RAW_FILES)
 

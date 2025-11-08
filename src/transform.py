@@ -6,13 +6,34 @@ import config
 
 
 def reorder_dates(df: pd.DataFrame, date_columns: list) -> pd.DataFrame:
+    """Changes date formt to yyyy-mm-dd
+    
+    Args:
+        df: dataframe containing raw data
+        date_columns: List of column names in df to perform operation on
+        
+    Returns:
+        A dataframe with transformation applied
+    """
     df[date_columns] = df[date_columns].apply(pd.to_datetime, dayfirst=True)
     return df
 
 def write_to_staging(table_name: str, df: pd.DataFrame) -> None:
+    """Writes parquet files with no index
+
+    Args:
+        table_name: The table to write
+        df: dataframe corresponding to table_name
+    """
     return df.to_parquet(config.PROCESSED_DATA_DIR / f"{table_name}.parquet", index=False)
 
 def transform_all_tables(tables: dict[str, Path]) -> None:
+    """Orchestrator function to transform all raw .csv files to .parquet with transformations
+    and move to staging folder.
+
+    Args: 
+        tables: dictionary containing path of all raw csv files
+    """
     for table in tables:
         df = pd.read_csv(tables[table])
 

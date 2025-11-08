@@ -57,7 +57,7 @@ class DatabaseConnection:
         return not self.connection.closed
 
     @contextmanager
-    def cursor(self, buffered: bool = True):
+    def cursor(self):
         """Create a cursor with automatic cleanup.
 
         This context manager ensures cursors are properly closed after use,

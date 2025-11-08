@@ -15,7 +15,8 @@ def get_table_dependencies(
         
     Returns:
         A list of tuples with each table and their relations, 
-        a table can appear multiple times if there's multiple relations"""
+        a table can appear multiple times if there's multiple relations
+    """
     with open(file=sql_procedure_path, mode="r") as file:
         content = file.read()
     with connection.cursor() as cursor:
@@ -27,6 +28,14 @@ def get_table_dependencies(
 def build_dependency_graph(
     table_relations: list[tuple[str, str]],
 ) -> dict[str, set[str]]:
+    """Helper function to create a graph like structure
+
+    Args:
+        table_relations: List of table relation pairs obtained
+
+    Returns: 
+        graph structure dictionary of tables containing parent tables as values
+    """
     table_set = set()
 
     for table, _ in table_relations:
@@ -78,6 +87,18 @@ def topological_sort(graph: dict[str, set[str]]) -> list[str]:
 
 
 def get_insert_order(sql_procedure_path: Path, connection) -> list[str]:
+    """Wrapper function to get insertion order from sql command
+
+    Args:
+        sql_procedure_path: Path to sql command returning table relations
+        connection: Connection to database
+
+    Returns: 
+        List of tables with insertion order given by list order
+
+    Raises:
+        ValueError: If insertion order is empty or cyclical
+    """
     table_relations = get_table_dependencies(
         sql_procedure_path=config.DEPENDENCIES_PROCEDURE, connection=connection
     )
